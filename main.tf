@@ -3,6 +3,6 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "b" {
-  bucket = "teste-s3-githubactions-gilmar"
+  bucket = "teste-s3-githubactions-gilmar-2"
   acl    = "private"
 }
