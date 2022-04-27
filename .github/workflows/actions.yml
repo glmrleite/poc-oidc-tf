@@ -19,7 +19,6 @@ jobs:
          terraform_version: 0.12.25
         
       - name: Configure AWS credentials
-        id: creds
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::910018674439:role/admin
