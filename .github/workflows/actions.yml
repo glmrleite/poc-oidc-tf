@@ -1,0 +1,32 @@
+name: A workflow to prove of concept in terraform
+on: push
+
+jobs:
+  deploy_terraform:
+    runs-on: ubuntu-latest
+    name: Terraform Plan & Apply
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v1
+        with:
+         terraform_version: 0.12.25
+        
+      - name: Configure AWS credentials
+        id: creds
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'us-east-1'
+
+      - name: Terraform Init
+        run: terraform init
+      
+      - name: Terraform validate
+        run: terraform validate
+      
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
